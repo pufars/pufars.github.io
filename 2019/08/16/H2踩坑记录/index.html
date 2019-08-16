@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019/8 | pufars的博客</title>
+  <title>H2踩坑记录 | pufars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Developer,Programmer,IT,程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="pufars的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2019/08/index.html">
+  <meta name="description" content="H2数据库踩坑记录常见问题JDBC配置以下均为内存模式配置及问题。  URL=jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE    参数 说明    testdb 数据库名   DB_CLOSE_DELAY=-1 表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)   DATABASE_TO_UPPE">
+<meta name="keywords" content="h2,java,数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="H2踩坑记录">
+<meta property="og:url" content="http://yoursite.com/2019/08/16/H2踩坑记录/index.html">
 <meta property="og:site_name" content="pufars的博客">
+<meta property="og:description" content="H2数据库踩坑记录常见问题JDBC配置以下均为内存模式配置及问题。  URL=jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE    参数 说明    testdb 数据库名   DB_CLOSE_DELAY=-1 表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)   DATABASE_TO_UPPE">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-16T07:26:59.852Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pufars的博客">
+<meta name="twitter:title" content="H2踩坑记录">
+<meta name="twitter:description" content="H2数据库踩坑记录常见问题JDBC配置以下均为内存模式配置及问题。  URL=jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE    参数 说明    testdb 数据库名   DB_CLOSE_DELAY=-1 表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)   DATABASE_TO_UPPE">
   
     <link rel="alternative" href="/atom.xml" title="pufars的博客" type="application/atom+xml">
   
@@ -151,36 +155,103 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-H2踩坑记录" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/16/H2踩坑记录/" class="archive-article-date">
-  	<time datetime="2019-08-16T07:24:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/16/H2踩坑记录/">H2踩坑记录</a>
+    <h1 class="article-title" itemprop="name">
+      H2踩坑记录
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2019/08/16/H2踩坑记录/" class="archive-article-date">
+  	<time datetime="2019-08-16T07:24:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="H2数据库踩坑记录"><a href="#H2数据库踩坑记录" class="headerlink" title="H2数据库踩坑记录"></a>H2数据库踩坑记录</h1><h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="JDBC配置"><a href="#JDBC配置" class="headerlink" title="JDBC配置"></a>JDBC配置</h3><p>以下均为内存模式配置及问题。</p>
+<ul>
+<li><p>URL=<code>jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>testdb</td>
+<td>数据库名</td>
+</tr>
+<tr>
+<td>DB_CLOSE_DELAY=-1</td>
+<td>表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)</td>
+</tr>
+<tr>
+<td>DATABASE_TO_UPPER</td>
+<td>表名为大写，如果表名小写会Table  not found</td>
+</tr>
+<tr>
+<td>MVCC=TRUE</td>
+<td>见下文Time out try to lock table</td>
+</tr>
+<tr>
+<td>MODE=ORACLE</td>
+<td>兼容模式。H2兼容多种数据库，该值可以为：DB2、Derby、HSQLDB、MSSQLServer、MySQL、Oracle、PostgreSQL</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>JdbcDriver =<code>org.h2.Driver</code></p>
+</li>
+<li><p>User=<code>sa</code></p>
+</li>
+<li><p>Password=<code>sa</code> <!--可不填--></p>
+<h3 id="Time-out-try-to-lock-table"><a href="#Time-out-try-to-lock-table" class="headerlink" title="Time out try to lock table"></a>Time out try to lock table</h3></li>
+</ul>
+<p>H2默认是进行表锁的，读操作加共享锁，写操作加互斥锁，（也就是写会阻塞读）等待锁超时会抛出异常。可以开启MVCC (Multi-Version Concurrent Control) 多版本并发控制模式，URL为<code>jdbc:h2:~/test;MVCC=TRUE</code>，开启MVCC模式后，所有操作都基于行锁，只能看到已提交的数据，写不 阻塞读。</p>
+<p>如果应用有并发请求的话，建议开启MVCC模式。</p>
+<h3 id="Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open"><a href="#Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open" class="headerlink" title="Cannot change the setting “MVCC” when the database is already open"></a>Cannot change the setting “MVCC” when the database is already open</h3><p>H2 开启了多个，检查H2配置，内存模式下只支持一个数据库实例。</p>
+<h3 id="其余问题"><a href="#其余问题" class="headerlink" title="其余问题"></a>其余问题</h3><ul>
+<li><p>H2不支持 <code>TO_DATE()</code>函数，需要转换时用<code>PARSEDATETIME(FORMATDATETIME(?, &#39;yyyy-MM-dd&#39;), &#39;yyyy-MM-dd&#39;)</code></p>
+</li>
+<li><p>H2不支持setArray，建议使用<code>PrepareStatement.SetObject(index,new object[]{........})</code></p>
+</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -200,7 +271,7 @@
 		</ul>
 	</div>
 
-          
+      
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -213,17 +284,107 @@
 	</div>
 
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/16/H2踩坑记录/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
+
   
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#H2数据库踩坑记录"><span class="toc-number">1.</span> <span class="toc-text">H2数据库踩坑记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC配置"><span class="toc-number">1.1.1.</span> <span class="toc-text">JDBC配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-out-try-to-lock-table"><span class="toc-number">1.1.2.</span> <span class="toc-text">Time out try to lock table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open"><span class="toc-number">1.1.3.</span> <span class="toc-text">Cannot change the setting “MVCC” when the database is already open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其余问题"><span class="toc-number">1.1.4.</span> <span class="toc-text">其余问题</span></a></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -246,8 +407,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
