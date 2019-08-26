@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2019 | pufars的博客</title>
+  <title>String和String Pool解析 | pufars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Developer,Programmer,IT,程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="pufars的博客">
-<meta property="og:url" content="http://yoursite.com/archives/2019/index.html">
+  <meta name="description" content="String 和String Pool解析概念不可变的StringString 的底层实际上是使用private final char[] value来实现字符串的存储的,是一个非可变类immutable，什么意思呢，就是String一旦被创建了，就不能被更改对象存储的字符串内容。 String PoolJVM为了提升性能和减少内存开销，避免字符串的重复创建，其维护了一块特殊的内存空间，即字符串池">
+<meta name="keywords" content="java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String和String Pool解析">
+<meta property="og:url" content="http://yoursite.com/2019/08/26/String和String-Pool解析/index.html">
 <meta property="og:site_name" content="pufars的博客">
+<meta property="og:description" content="String 和String Pool解析概念不可变的StringString 的底层实际上是使用private final char[] value来实现字符串的存储的,是一个非可变类immutable，什么意思呢，就是String一旦被创建了，就不能被更改对象存储的字符串内容。 String PoolJVM为了提升性能和减少内存开销，避免字符串的重复创建，其维护了一块特殊的内存空间，即字符串池">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-26T09:45:04.386Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="pufars的博客">
+<meta name="twitter:title" content="String和String Pool解析">
+<meta name="twitter:description" content="String 和String Pool解析概念不可变的StringString 的底层实际上是使用private final char[] value来实现字符串的存储的,是一个非可变类immutable，什么意思呢，就是String一旦被创建了，就不能被更改对象存储的字符串内容。 String PoolJVM为了提升性能和减少内存开销，避免字符串的重复创建，其维护了一块特殊的内存空间，即字符串池">
   
     <link rel="alternative" href="/atom.xml" title="pufars的博客" type="application/atom+xml">
   
@@ -147,36 +151,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-String和String-Pool解析" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      String和String Pool解析
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2019" class="archive-year">2019</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/26/String和String-Pool解析/" class="archive-article-date">
+
+        
+        <a href="/2019/08/26/String和String-Pool解析/" class="archive-article-date">
   	<time datetime="2019-08-26T06:15:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/26/String和String-Pool解析/">String和String Pool解析</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="String-和String-Pool解析"><a href="#String-和String-Pool解析" class="headerlink" title="String 和String Pool解析"></a>String 和String Pool解析</h1><h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><h3 id="不可变的String"><a href="#不可变的String" class="headerlink" title="不可变的String"></a>不可变的String</h3><p><code>String</code> 的底层实际上是使用<code>private final char[] value</code>来实现字符串的存储的,是一个非可变类<code>immutable</code>，什么意思呢，就是<code>String</code>一旦被创建了，就不能被更改对象存储的字符串内容。</p>
+<h3 id="String-Pool"><a href="#String-Pool" class="headerlink" title="String Pool"></a>String Pool</h3><p>JVM为了提升性能和减少内存开销，避免字符串的重复创建，其维护了一块特殊的内存空间，即字符串池（<code>String Pool</code>）。字符串池由<code>String</code>类私有的维护。<code>String Pool</code>里面有很多对象，这些对象可以被共享使用，当以字符串直接创建<code>String</code>对象时，会先在<code>String Pool</code>中查找是否存在该常量，有则返回地址，没有则创建一个再返回地址。</p>
+<h2 id="String-的创建"><a href="#String-的创建" class="headerlink" title="String 的创建"></a>String 的创建</h2><p>有了以上概念，可以进一步了解String的构造形式了。一般来说，创建String字符串有两种形式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line">String str2 = <span class="string">"abc"</span>;</span><br></pre></td></tr></table></figure>
 
-        <div class="article-info info-on-right">
-          
+<p>两个都是返回<code>abc</code>,但是在JVM内部，处理的方式是不一样的。</p>
+<p>对于第一种，JVM会在<code>String Pool</code>中放入一个<code>abc</code>的的对象，并在<code>heap</code>中创建一个<code>String</code>类型的对象，然后将对象的引用返回给创建者，返回的是<code>heap</code>中的对象。</p>
+<p>第二种，JVM则是在<code>String Pool</code>中通过<code>equals</code>形式查找是否存在<code>abc</code>对象，有则不创建，不会在heap中重新创建一个新的String对象，没有则创建一个<code>abc</code>的对象并放入<code>String Pool</code>中，并在<code>heap</code>中创建一个<code>String</code>类型的对象，返回的是<code>String Pool</code>中的对象。</p>
+<p>注意：<strong>使用第一种方法创建对象时，JVM是会主动把该对象放到<code>strings pool</code>里面的。</strong></p>
+<p>在<code>DeepClone</code>重写<code>Clone()</code>方法时，引用类型都必须重新赋值，比如<code>java.util.Date</code>、<code>BigDecimal</code>等，但<code>String</code>类型就不必，原因就是<code>String Pool</code>的存在。</p>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jvm 在堆上创建一个String对象并在内部维护的strings pool中放入一个"abc"对象 </span></span><br><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>);</span><br><span class="line"><span class="comment">//jvm在strings pool中能找到值为“abc”的字符串，将其引用直接返回给str2</span></span><br><span class="line">Stirng str2 = <span class="string">"abc"</span>;</span><br><span class="line"><span class="keyword">if</span>(str1 == str2)&#123;</span><br><span class="line">  System.out.println(<span class="string">"str1 == str2"</span>);    </span><br><span class="line">&#125;<span class="keyword">else</span>&#123;    </span><br><span class="line">    System.out.println(<span class="string">"str1 != str2"</span>);    </span><br><span class="line">&#125; </span><br><span class="line">  <span class="comment">//打印结果是 str1 != str2,因为前者指向heap中的对象，后者指向String Pool中的对象</span></span><br></pre></td></tr></table></figure>
+
+<p>再看另外一个例子</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//jvm 在堆上创建一个String对象并在内部维护的String Pool中放入一个"abc"对象 </span></span><br><span class="line">String str1 = <span class="keyword">new</span> String(<span class="string">"abc"</span>); </span><br><span class="line"><span class="comment">//intern用来返回常量池中的某字符串，如果常量池中已经存在该字符串，则直接返回常量池中该对象的引用。否则，在常量池中加入该对象，然后 返回引用。这里显性将引用由heap中的对象指向了String Pool里面的对象</span></span><br><span class="line"> str1 = str1.intern();</span><br><span class="line"><span class="comment">////执行完该语句后，str1原来指向的heap中String对象已经成为垃圾对象了，随时会被GC收集。</span></span><br><span class="line"><span class="comment">//此时，str1指向strings pool中的"abc”对象，也就是说str2和str1引用着同一个对象。  </span></span><br><span class="line">    Stirng str2 = <span class="string">"abc"</span>;    </span><br><span class="line">   </span><br><span class="line">    <span class="keyword">if</span>(str1 == str2)&#123;    </span><br><span class="line">        System.out.println(<span class="string">"str1 == str2"</span>);    </span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;    </span><br><span class="line">        System.out.println(<span class="string">"str1 != str2"</span>);    </span><br><span class="line">    &#125;    </span><br><span class="line">   <span class="comment">//打印结果是 str1 == str2</span></span><br></pre></td></tr></table></figure>
+
+<p>为什么JVM可以这样处理<code>String</code>对象呢？就是因为<code>String</code>的非可变性。既然所引用的对象一旦创建就永不更改，那么多个引用共用一个对象时互不影响。</p>
+<p>但是如果用+号来实现<code>String</code>的串接时：</p>
+<ol>
+<li>仅当+号两边均为字符串常量时，才将其+后的结果当做字符串常量，且该结果直接放入<code>String Pool</code>；</li>
+<li>若+号两边有一方为变量时，+后的结果即当做非字符串常量处理(等同于<code>new String()</code>的效果)。</li>
+</ol>
+<h2 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h2><h3 id="串接（Concatenation）"><a href="#串接（Concatenation）" class="headerlink" title="串接（Concatenation）"></a>串接（Concatenation）</h3><p>滥用String的串接操作符是会影响程序的性能的。性能问题从何而来呢？归根结底就是<code>String</code>类的非可变性。<br>既然<code>String</code>对象都是非可变的，也就是对象一旦创建了就不能够改变其内在状态了，但是串接操作明显是要增长字符串的，也就是要改变<code>String</code>的内部状态，两者出现了矛盾。怎么办呢？<br>要维护<code>String</code>的非可变性，只好在串接完成后新建一个<code>String</code> 对象来表示新产生的字符串了。也就是说，每一次执行串接操作都会导致新对象的产生，如果串接操作执行很频繁，就会导致大量对象的创建，性能问题也就随之而来了。<br>为了解决这个问题，jdk为<code>String</code>类提供了一个可变的配套类，<code>StringBuffer</code>。使用<code>StringBuffer</code>对象，由于该类是可变的，串接时仅仅时改变了内部数据结构，而不会创建新的对象，因此性能上有很大的提高。针对单线程，jdk 5.0还提供了<code>StringBuilder</code>类，在单线程环境下，由于不用考虑同步问题，使用该类使性能得到进一步的提高。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">StringBuffer buffer = <span class="keyword">new</span> StringBuffer();</span><br><span class="line">buffer.append(<span class="string">"this str is "</span>);</span><br><span class="line">buffer.append(<span class="string">" append by"</span>);</span><br><span class="line">buffer.append(<span class="string">" StringBuffer "</span>);</span><br><span class="line">String str  = buffer.toString();</span><br></pre></td></tr></table></figure>
+
+<h3 id="String的长度"><a href="#String的长度" class="headerlink" title="String的长度"></a>String的长度</h3><p>我们可以使用串接操作符得到一个长度更长的字符串，那么，<code>String</code>对象最多能容纳多少字符呢？查看<code>String</code>的源代码我们可以得知类<code>String</code>中是使用域<code>count</code>来记录对象字符的数量，而<code>count</code> 的类型为<code>int</code>，因此，我们可以推测最长的长度为<code>2^32</code>，也就是<code>4G</code>。<br>不过，我们在编写源代码的时候，如果使用 <code>Sting str = &quot;aaaa&quot;;</code>的形式定义一个字符串，那么双引号里面的ASCII字符最多只能有 65534 个。为什么呢？因为在class文件的规范中， <code>CONSTANT_Utf8_info</code>表中使用一个16位的无符号整数来记录字符串的长度的，最多能表示 65536个字节，而java class 文件是使用一种变体<code>UTF-8</code>格式来存放字符的，null值使用两个字节来表示，因此只剩下 65536－ 2 ＝ 65534个字节。也正是变体<code>UTF-8</code>的原因，如果字符串中含有中文等非<code>ASCII</code>字符，那么双引号中字符的数量会更少（一个中文字符占用三个字节）。如果超出这个数量，在编译的时候编译器会报错。</p>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -188,160 +236,106 @@
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/08/26/String和String-Pool解析/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/21/sql优化笔记/" class="archive-article-date">
-  	<time datetime="2019-08-21T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2019/08/21/sql优化笔记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">sql优化笔记</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/21/sql优化笔记/">sql优化笔记</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/18/设计模式/" class="archive-article-date">
-  	<time datetime="2019-08-18T07:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/18/设计模式/">设计模式</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2019/08/16/H2踩坑记录/" class="archive-article-date">
-  	<time datetime="2019-08-16T07:24:31.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-16</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2019/08/16/H2踩坑记录/">H2踩坑记录</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">h2</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/数据库//" class="article-tag-list-link color4">数据库</a>
-        		</li>
-      		
-		</ul>
-	</div>
+        
+        
+    </div>
+</aside>
 
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
+
   
   
-    </div></section>
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -364,8 +358,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
