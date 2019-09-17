@@ -9,14 +9,14 @@
   <title>H2踩坑记录 | pufars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="H2数据库踩坑记录常见问题JDBC配置以下均为内存模式配置及问题。  URL=jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE    参数 说明    testdb 数据库名   DB_CLOSE_DELAY=-1 表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)   DATABASE_TO_UPPE">
-<meta name="keywords" content="h2,java,数据库">
+<meta name="keywords" content="java,h2,数据库">
 <meta property="og:type" content="article">
 <meta property="og:title" content="H2踩坑记录">
 <meta property="og:url" content="http://yoursite.com/2019/08/16/H2踩坑记录/index.html">
 <meta property="og:site_name" content="pufars的博客">
 <meta property="og:description" content="H2数据库踩坑记录常见问题JDBC配置以下均为内存模式配置及问题。  URL=jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE    参数 说明    testdb 数据库名   DB_CLOSE_DELAY=-1 表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)   DATABASE_TO_UPPE">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-21T11:23:35.238Z">
+<meta property="og:updated_time" content="2019-08-29T11:59:07.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="H2踩坑记录">
 <meta name="twitter:description" content="H2数据库踩坑记录常见问题JDBC配置以下均为内存模式配置及问题。  URL=jdbc:h2:mem:testDb;DB_CLOSE_DELAY=-1;MODE=Oracle;MVCC=TRUE    参数 说明    testdb 数据库名   DB_CLOSE_DELAY=-1 表示close最后一个connect时不会关闭数据库(如果不配置这个则会关闭)   DATABASE_TO_UPPE">
@@ -208,12 +208,13 @@
 <li><p>User=<code>sa</code></p>
 </li>
 <li><p>Password=<code>sa</code> [可不填]</p>
-<h3 id="Time-out-try-to-lock-table"><a href="#Time-out-try-to-lock-table" class="headerlink" title="Time out try to lock table"></a>Time out try to lock table</h3></li>
+</li>
 </ul>
-<p>H2默认是进行表锁的，读操作加共享锁，写操作加互斥锁，（也就是写会阻塞读）等待锁超时会抛出异常。可以开启MVCC (Multi-Version Concurrent Control) 多版本并发控制模式，URL为<code>jdbc:h2:~/test;MVCC=TRUE</code>，开启MVCC模式后，所有操作都基于行锁，只能看到已提交的数据，写不 阻塞读。</p>
 <a id="more"></a>
+<h3 id="Time-out-try-to-lock-table"><a href="#Time-out-try-to-lock-table" class="headerlink" title="Time out try to lock table"></a>Time out try to lock table</h3><p>H2默认是进行表锁的，读操作加共享锁，写操作加互斥锁，（也就是写会阻塞读）等待锁超时会抛出异常。可以开启MVCC (Multi-Version Concurrent Control) 多版本并发控制模式，URL为<code>jdbc:h2:~/test;MVCC=TRUE</code>，开启MVCC模式后，所有操作都基于行锁，只能看到已提交的数据，写不 阻塞读。</p>
 <p>如果应用有并发请求的话，建议开启MVCC模式。</p>
 <h3 id="Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open"><a href="#Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open" class="headerlink" title="Cannot change the setting “MVCC” when the database is already open"></a>Cannot change the setting “MVCC” when the database is already open</h3><p>H2 开启了多个，检查H2配置，内存模式下只支持一个数据库实例。</p>
+<h3 id="IOException-Cannot-run-program-“javac”-CreateProcess-error-2-The-system-cannot-find-the-file-specified"><a href="#IOException-Cannot-run-program-“javac”-CreateProcess-error-2-The-system-cannot-find-the-file-specified" class="headerlink" title="IOException: Cannot run program “javac”: CreateProcess error=2, The system cannot find the file specified"></a>IOException: Cannot run program “javac”: CreateProcess error=2, The system cannot find the file specified</h3><p>环境使用的是JRE,不包含<code>javac</code>,使用JDK。</p>
 <h3 id="其余问题"><a href="#其余问题" class="headerlink" title="其余问题"></a>其余问题</h3><ul>
 <li><p>H2不支持 <code>TO_DATE()</code>函数，需要转换时用<code>PARSEDATETIME(FORMATDATETIME(?, &#39;yyyy-MM-dd&#39;), &#39;yyyy-MM-dd&#39;)</code>，或者初始化时增加TO_DATE函数。</p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">drop</span> <span class="keyword">ALIAS</span> <span class="keyword">if</span> <span class="keyword">exists</span> <span class="keyword">TO_DATE</span>; </span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">ALIAS</span> <span class="keyword">TO_DATE</span> <span class="keyword">as</span> $$</span><br><span class="line"></span><br><span class="line">java.util.Date toDate(<span class="keyword">String</span> s, <span class="keyword">String</span> dateFormat) throws <span class="keyword">Exception</span> &#123; </span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> java.text.SimpleDateFormat(dateFormat).parse(s); </span><br><span class="line">&#125; $$</span><br></pre></td></tr></table></figure>
@@ -258,11 +259,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">h2</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">h2</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -347,11 +348,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/08/18/设计模式/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2019/08/26/String和String-Pool解析/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          设计模式
+          String和String Pool解析
         
       </div>
     </a>
@@ -380,7 +381,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#H2数据库踩坑记录"><span class="toc-number">1.</span> <span class="toc-text">H2数据库踩坑记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC配置"><span class="toc-number">1.1.1.</span> <span class="toc-text">JDBC配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-out-try-to-lock-table"><span class="toc-number">1.1.2.</span> <span class="toc-text">Time out try to lock table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open"><span class="toc-number">1.1.3.</span> <span class="toc-text">Cannot change the setting “MVCC” when the database is already open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其余问题"><span class="toc-number">1.1.4.</span> <span class="toc-text">其余问题</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#H2数据库踩坑记录"><span class="toc-number">1.</span> <span class="toc-text">H2数据库踩坑记录</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见问题"><span class="toc-number">1.1.</span> <span class="toc-text">常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JDBC配置"><span class="toc-number">1.1.1.</span> <span class="toc-text">JDBC配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Time-out-try-to-lock-table"><span class="toc-number">1.1.2.</span> <span class="toc-text">Time out try to lock table</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cannot-change-the-setting-“MVCC”-when-the-database-is-already-open"><span class="toc-number">1.1.3.</span> <span class="toc-text">Cannot change the setting “MVCC” when the database is already open</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IOException-Cannot-run-program-“javac”-CreateProcess-error-2-The-system-cannot-find-the-file-specified"><span class="toc-number">1.1.4.</span> <span class="toc-text">IOException: Cannot run program “javac”: CreateProcess error=2, The system cannot find the file specified</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其余问题"><span class="toc-number">1.1.5.</span> <span class="toc-text">其余问题</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -492,7 +493,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">h2</a>
+                <a href="javascript:void(0)" class="js-tag color2">JVM虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -500,15 +501,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">h2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>

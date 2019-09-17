@@ -149,6 +149,101 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JVM 内存模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/09/17/JVM 内存模型/">JVM 内存模型</a>
+    </h1>
+  
+
+        
+        <a href="/2019/09/17/JVM 内存模型/" class="archive-article-date">
+  	<time datetime="2019-09-17T07:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JVM-内存模型"><a href="#JVM-内存模型" class="headerlink" title="JVM 内存模型"></a>JVM 内存模型</h1><h2 id="虚拟机种类"><a href="#虚拟机种类" class="headerlink" title="虚拟机种类"></a>虚拟机种类</h2><ul>
+<li>Sun Classic/Exact VM (JDK 1.0 -1.4)</li>
+<li>Sun HotSpot VM(Sun JDK 和Open JDK)</li>
+<li>BEA JRockit/IBM J9 VM</li>
+<li>Azul VM/BEA Liquid VM</li>
+</ul>
+<h2 id="JVM-内存区域"><a href="#JVM-内存区域" class="headerlink" title="JVM 内存区域"></a>JVM 内存区域</h2><p><img src="../assets/img/JVM/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.jpg" alt="JVM内存区域"></p>
+<p>线程私有的：</p>
+<ul>
+<li>程序计数器</li>
+<li>虚拟机栈</li>
+<li>本地方法栈<br>线程共享的：</li>
+<li>堆</li>
+<li>方法区</li>
+<li>直接内存</li>
+</ul>
+        
+          <a class="article-more-a" href="/2019/09/17/JVM 内存模型/#more">more >></a>
+        
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">JVM虚拟机</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/09/17/JVM 内存模型/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-String和String-Pool解析" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -201,192 +296,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/08/26/String和String-Pool解析/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-sql优化笔记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/21/sql优化笔记/">sql优化笔记</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/21/sql优化笔记/" class="archive-article-date">
-  	<time datetime="2019-08-21T11:24:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="sql优化笔记"><a href="#sql优化笔记" class="headerlink" title="sql优化笔记"></a>sql优化笔记</h1><h2 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h2><h3 id="IN（A-B-C。。。）"><a href="#IN（A-B-C。。。）" class="headerlink" title="IN（A,B,C。。。）"></a>IN（A,B,C。。。）</h3><ul>
-<li><p><code>IN(A,B,C。。。)</code> Oracle最大数量为1000，这也是为了性能考虑，在大数据情况下，推荐使用<code>exists</code>,</p>
-<p>并配合事务级临时表来提高性能。</p>
-<p>比如；查询证券代码，证券代码10w+。</p>
-<ol>
-<li><p>创建一张临时表</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> tempSec(secCode varchar2(<span class="number">50</span>))</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-</li>
-</ul>
-<ol start="2">
-<li>查询语句<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> * <span class="keyword">FROM</span> TABLEA T <span class="keyword">WHERE</span> <span class="keyword">EXISTS</span>(<span class="keyword">SELECT</span> secCode <span class="keyword">FROM</span> tempSec R <span class="keyword">WHERE</span> R.secCode = T.secCode )</span><br></pre></td></tr></table></figure>
-
-
-</li>
-</ol>
-<ol start="3">
-<li>Java代码<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">conn.setAutoComit(<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">////插入临时表</span></span><br><span class="line">tempTableService.insertTempTable(secCode,conn);</span><br><span class="line"><span class="comment">///查询,略</span></span><br><span class="line"><span class="comment">////删除临时表数据</span></span><br><span class="line">tempTableService.deleteTempTable(conn);</span><br><span class="line">conn.commit();</span><br><span class="line">conn.setAutoCommit(t);</span><br></pre></td></tr></table></figure></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">数据库</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">sql</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/21/sql优化笔记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-设计模式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/08/18/设计模式/">设计模式</a>
-    </h1>
-  
-
-        
-        <a href="/2019/08/18/设计模式/" class="archive-article-date">
-  	<time datetime="2019-08-18T07:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="设计模式"><a href="#设计模式" class="headerlink" title="设计模式"></a>设计模式</h1><h2 id="6种基本原则"><a href="#6种基本原则" class="headerlink" title="6种基本原则"></a>6种基本原则</h2><h3 id="单一职责原则"><a href="#单一职责原则" class="headerlink" title="单一职责原则"></a>单一职责原则</h3><h4 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h4><p>不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。 </p>
-<h4 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h4><ul>
-<li>可以降低类的复杂度，一个类只维护一项职责，其逻辑肯定要比负责多项职责简单的多；</li>
-<li>提高类的可读性，提高系统的可维护性；</li>
-<li>变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</li>
-</ul>
-<p>实际过程中，需要把握细分的颗粒度，过分的细分会增加系统的复杂程度。理论上讲，原则是很优秀的，但实际上有各种现实的难处，项目工期，成本，人员技术水平等。</p>
-<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3>
-        
-          <a class="article-more-a" href="/2019/08/18/设计模式/#more">more >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">设计模式</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/08/18/设计模式/">展开全文 >></a>
         </p>
       
 
@@ -473,9 +382,8 @@
 <li><p>User=<code>sa</code></p>
 </li>
 <li><p>Password=<code>sa</code> [可不填]</p>
-<h3 id="Time-out-try-to-lock-table"><a href="#Time-out-try-to-lock-table" class="headerlink" title="Time out try to lock table"></a>Time out try to lock table</h3></li>
+</li>
 </ul>
-<p>H2默认是进行表锁的，读操作加共享锁，写操作加互斥锁，（也就是写会阻塞读）等待锁超时会抛出异常。可以开启MVCC (Multi-Version Concurrent Control) 多版本并发控制模式，URL为<code>jdbc:h2:~/test;MVCC=TRUE</code>，开启MVCC模式后，所有操作都基于行锁，只能看到已提交的数据，写不 阻塞读。</p>
         
           <a class="article-more-a" href="/2019/08/16/H2踩坑记录/#more">more >></a>
         
@@ -491,11 +399,11 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">h2</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">h2</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
@@ -643,7 +551,7 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">h2</a>
+                <a href="javascript:void(0)" class="js-tag color2">JVM虚拟机</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -651,15 +559,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">h2</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">数据库</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">sql</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">设计模式</a>
               </li>
             
             <div class="clearfix"></div>
