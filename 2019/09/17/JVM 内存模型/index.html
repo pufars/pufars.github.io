@@ -1,29 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head><meta name="generator" content="Hexo 3.9.0">
+<head>
   <meta charset="utf-8">
   
   <meta name="renderer" content="webkit">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>JVM 内存模型 | pufars的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JVM 内存模型虚拟机种类 Sun Classic/Exact VM (JDK 1.0 -1.4) Sun HotSpot VM(Sun JDK 和Open JDK) BEA JRockit/IBM J9 VM Azul VM/BEA Liquid VM  JVM 内存区域 线程私有的：  程序计数器 虚拟机栈 本地方法栈线程共享的： 堆 方法区 直接内存">
-<meta name="keywords" content="java,JVM虚拟机">
+  <meta name="description" content="JVM 内存模型虚拟机种类 Sun Classic&#x2F;Exact VM (JDK 1.0 -1.4) Sun HotSpot VM(Sun JDK 和Open JDK) BEA JRockit&#x2F;IBM J9 VM Azul VM&#x2F;BEA Liquid VM  JVM 内存区域 线程私有的：  程序计数器 虚拟机栈 本地方法栈线程共享的： 堆 方法区 直接内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JVM 内存模型">
-<meta property="og:url" content="http://yoursite.com/2019/09/17/JVM 内存模型/index.html">
+<meta property="og:url" content="http://yoursite.com/2019/09/17/JVM%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="pufars的博客">
-<meta property="og:description" content="JVM 内存模型虚拟机种类 Sun Classic/Exact VM (JDK 1.0 -1.4) Sun HotSpot VM(Sun JDK 和Open JDK) BEA JRockit/IBM J9 VM Azul VM/BEA Liquid VM  JVM 内存区域 线程私有的：  程序计数器 虚拟机栈 本地方法栈线程共享的： 堆 方法区 直接内存">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:description" content="JVM 内存模型虚拟机种类 Sun Classic&#x2F;Exact VM (JDK 1.0 -1.4) Sun HotSpot VM(Sun JDK 和Open JDK) BEA JRockit&#x2F;IBM J9 VM Azul VM&#x2F;BEA Liquid VM  JVM 内存区域 线程私有的：  程序计数器 虚拟机栈 本地方法栈线程共享的： 堆 方法区 直接内存">
+<meta property="og:locale">
 <meta property="og:image" content="https://github.com/pufars/pufars.github.io/blob/master/assets/img/JVM/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.jpg">
 <meta property="og:image" content="https://github.com/pufars/pufars.github.io/blob/master/assets/img/JVM/Heap.png">
 <meta property="og:image" content="https://github.com/pufars/pufars.github.io/blob/master/assets/img/JVM/%E5%B8%B8%E9%87%8F%E6%B1%A0.jpg">
 <meta property="og:image" content="https://github.com/pufars/pufars.github.io/blob/master/assets/img/JVM/JVMConfig.png">
-<meta property="og:updated_time" content="2019-09-18T06:46:22.447Z">
+<meta property="article:published_time" content="2019-09-17T07:26:04.000Z">
+<meta property="article:modified_time" content="2019-09-18T06:48:48.303Z">
+<meta property="article:author" content="pufars">
+<meta property="article:tag" content="java">
+<meta property="article:tag" content="JVM虚拟机">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JVM 内存模型">
-<meta name="twitter:description" content="JVM 内存模型虚拟机种类 Sun Classic/Exact VM (JDK 1.0 -1.4) Sun HotSpot VM(Sun JDK 和Open JDK) BEA JRockit/IBM J9 VM Azul VM/BEA Liquid VM  JVM 内存区域 线程私有的：  程序计数器 虚拟机栈 本地方法栈线程共享的： 堆 方法区 直接内存">
 <meta name="twitter:image" content="https://github.com/pufars/pufars.github.io/blob/master/assets/img/JVM/JVM%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F.jpg">
   
     <link rel="alternative" href="/atom.xml" title="pufars的博客" type="application/atom+xml">
@@ -42,8 +43,8 @@
 
   
 
-</head>
-</html>
+<meta name="generator" content="Hexo 5.1.1"></head>
+
 <body>
   <div id="container" q-class="show:isCtnShow">
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
@@ -56,7 +57,7 @@
 			<img src="/img/aboutme/me.jpg" class="js-avatar">
 		</a>
 		<hgroup>
-		  <h1 class="header-author"><a href="/">pufars</a></h1>
+		  <h1 class="header-author"><a href="/"></a></h1>
 		</hgroup>
 		
 
@@ -65,7 +66,7 @@
 			
 				<li><a href="/">主页</a></li>
 	        
-				<li><a href="/tags/随笔/">随笔</a></li>
+				<li><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 	        
 			</ul>
 		</nav>
@@ -112,7 +113,7 @@
 				<img src="/img/aboutme/me.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author js-header-author">pufars</h1>
+			  <h1 class="header-author js-header-author"></h1>
 			</hgroup>
 			
 			
@@ -141,7 +142,7 @@
 				
 					<li style="width: 50%"><a href="/">主页</a></li>
 		        
-					<li style="width: 50%"><a href="/tags/随笔/">随笔</a></li>
+					<li style="width: 50%"><a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></li>
 		        
 				</ul>
 			</nav>
@@ -168,7 +169,7 @@
   
 
         
-        <a href="/2019/09/17/JVM 内存模型/" class="archive-article-date">
+        <a href="/2019/09/17/JVM%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" class="archive-article-date">
   	<time datetime="2019-09-17T07:26:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-17</time>
 </a>
         
@@ -229,7 +230,7 @@
 <li>最小堆内存 1024m</li>
 <li>永久代内存1024m</li>
 </ul>
-<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> JAVA_OPTS=%JAVA_OPTS% -server -Xms1024m -Xmx4096m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=2048m</span><br></pre></td></tr></table></figure>
+<h3 id="Tomcat"><a href="#Tomcat" class="headerlink" title="Tomcat"></a>Tomcat</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">set</span> JAVA_OPTS=%JAVA_OPTS% -server -Xms1024m -Xmx4096m -XX:MaxNewSize=512m -XX:PermSize=512m -XX:MaxPermSize=2048m</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p><code>MaxNewSize=512m</code>  新生代内存</p>
 
@@ -326,7 +327,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/17/JVM 内存模型/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/09/17/JVM%20%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -340,8 +341,17 @@
   
 <nav id="article-nav">
   
+    <a href="/2019/11/08/Spring%E7%9A%84%E4%BA%8B%E5%8A%A1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Spring的事务
+        
+      </div>
+    </a>
   
-    <a href="/2019/08/26/String和String-Pool解析/" id="article-nav-older" class="article-nav-link-wrap">
+  
+    <a href="/2019/08/26/String%E5%92%8CString-Pool%E8%A7%A3%E6%9E%90/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">String和String Pool解析</div>
       <i class="icon-circle-right"></i>
     </a>
@@ -369,7 +379,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM-内存模型"><span class="toc-number">1.</span> <span class="toc-text">JVM 内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#虚拟机种类"><span class="toc-number">1.1.</span> <span class="toc-text">虚拟机种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-内存区域"><span class="toc-number">1.2.</span> <span class="toc-text">JVM 内存区域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#程序计数器（Program-Counter-Register）"><span class="toc-number">1.2.1.</span> <span class="toc-text">程序计数器（Program Counter Register）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#栈（VM-Stack）"><span class="toc-number">1.2.2.</span> <span class="toc-text">栈（VM Stack）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#堆（Heap）"><span class="toc-number">1.2.3.</span> <span class="toc-text">堆（Heap）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#方法区（Method-Area）"><span class="toc-number">1.2.4.</span> <span class="toc-text">方法区（Method Area）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时常量池"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#直接内存"><span class="toc-number">1.2.5.</span> <span class="toc-text">直接内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#常见JVM配置"><span class="toc-number">1.3.</span> <span class="toc-text">常见JVM配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eclipse"><span class="toc-number">1.3.1.</span> <span class="toc-text">Eclipse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat"><span class="toc-number">1.3.2.</span> <span class="toc-text">Tomcat</span></a></li></ol></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JVM-%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">JVM 内存模型</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A7%8D%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">虚拟机种类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM-%E5%86%85%E5%AD%98%E5%8C%BA%E5%9F%9F"><span class="toc-number">1.2.</span> <span class="toc-text">JVM 内存区域</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A8%8B%E5%BA%8F%E8%AE%A1%E6%95%B0%E5%99%A8%EF%BC%88Program-Counter-Register%EF%BC%89"><span class="toc-number">1.2.1.</span> <span class="toc-text">程序计数器（Program Counter Register）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%EF%BC%88VM-Stack%EF%BC%89"><span class="toc-number">1.2.2.</span> <span class="toc-text">栈（VM Stack）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A0%86%EF%BC%88Heap%EF%BC%89"><span class="toc-number">1.2.3.</span> <span class="toc-text">堆（Heap）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E5%8C%BA%EF%BC%88Method-Area%EF%BC%89"><span class="toc-number">1.2.4.</span> <span class="toc-text">方法区（Method Area）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E6%97%B6%E5%B8%B8%E9%87%8F%E6%B1%A0"><span class="toc-number">1.2.4.1.</span> <span class="toc-text">运行时常量池</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E5%86%85%E5%AD%98"><span class="toc-number">1.2.5.</span> <span class="toc-text">直接内存</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81JVM%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">常见JVM配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Eclipse"><span class="toc-number">1.3.1.</span> <span class="toc-text">Eclipse</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tomcat"><span class="toc-number">1.3.2.</span> <span class="toc-text">Tomcat</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -398,7 +408,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 pufars
+    		&copy; 2020 pufars
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
